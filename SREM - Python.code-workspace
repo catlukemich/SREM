@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "Assets"
+		},
+		{
+			"path": "Documents"
+		},
+		{
+			"path": "Working"
+		}
+	],
+	"settings": {
+		"path-autocomplete.pathMappings": {
+		"$root" :  ""
+		}
+	}
+}
