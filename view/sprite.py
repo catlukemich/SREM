@@ -56,7 +56,7 @@ class Sprite:
         return copy.copy(self)
 
 
-    def contains(self, x, y):
+    def contains(self, x : int , y : int):
         ''' 
         Check if the sprite contains the mouse coordinate 
         taking transparent pixels (opacity) into account.
@@ -65,7 +65,7 @@ class Sprite:
         if x < 0 or x > w or y < 0 or y > h:
             return False
         else:
-            pixel = self.image.get_at(x, y)
+            pixel = self.image.get_at((x, y))
             if pixel[3] < 200:
                 return self
             else:
