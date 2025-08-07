@@ -51,10 +51,9 @@ class World:
     def create_building(self):
         ''' Create the main building, the Real Estate '''
         view = self.main.view
-
         self.building = Building(view)
-        # self.building.add_to_view()
         view.add_sprite(self.building)
+
 
     def place(self, image_path, loc : tuple = (0, 0, 0), layer = Layer.OBJECTS_LAYER):
             ''' Utility inner function for placing new sprites '''
@@ -72,28 +71,28 @@ class World:
         '''
         Create paths that the cars will use to travel.
         '''
-        # Bottom row
-        path = Path(vec3(6.25, 15), vec3(6.25, -12.5), Heading.NORTH)
-        self.paths.append(path)
+        paths = [
+            # Bottom row
+            path = Path(vec3(6.25, 15), vec3(6.25, -12.5), Heading.NORTH),
+            path = Path(vec3(5.75, -12.5), vec3(5.75, 15),  Heading.SOUTH),
+            # Middle row
+            path = Path(vec3(0.25, 10), vec3(0.25, -12.5), Heading.NORTH),
+            path = Path(vec3(-0.25, -12.5), vec3(-0.25, 10), Heading.SOUTH)
+            # Top row
+            path = Path(vec3(-5.75, 26), vec3(-5.75, -26.5), Heading.NORTH)
+            path = Path(vec3(-6.25, -36.5), vec3(-6.25, 36), Heading.SOUTH)
+        ]
 
-        path = Path(vec3(5.75, -12.5), vec3(5.75, 15),  Heading.SOUTH)
-        self.paths.append(path)
+        for path in paths:
+            self.paths.append(path)
 
-        # Middle row
-        path = Path(vec3(0.25, 10), vec3(0.25, -12.5), Heading.NORTH)
-        self.paths.append(path)
-
-        path = Path(vec3(-0.25, -12.5), vec3(-0.25, 10), Heading.SOUTH)
-        self.paths.append(path)
-
-        # Top row
-        path = Path(vec3(-5.75, 26), vec3(-5.75, -26.5), Heading.NORTH)
-        self.paths.append(path)
-
-        path = Path(vec3(-6.25, -36.5), vec3(-6.25, 36), Heading.SOUTH)
-        self.paths.append(path)
 
     def update(self, clock, speed):
+        ''' 
+        Update the gameplay state:
+        - the day, year and month
+        - the vehicles eyecandy
+        '''
         if self.time > Gameplay.MILLIS_PER_DAY / speed:
             self.day += 1
             if self.day > 30:
@@ -101,6 +100,7 @@ class World:
                 self.day = 1
             self.time = self.time - Gameplay.MILLIS_PER_DAY / speed
             if self.day == 30:
+                self.building.update_contentment()
                 player = self.main.player
                 self.on_day(self.month, self.day)
                 player.on_day(self.month, self.day)
@@ -109,14 +109,11 @@ class World:
 
         self.spawn_cars(clock)
         self.update_cars(clock, speed)
+
         self.building.update(clock)
         self.chopper.update(clock)
 
-    def on_day(self, month, day):
-        if day == 30:
-            self.building.update_contentment()
-
-   
+ 
     def spawn_cars(self, clock):
         '''
         Spawn cars if their number is below certain threshold.
