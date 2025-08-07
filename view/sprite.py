@@ -1,3 +1,4 @@
+from assets import *
 from functools import cmp_to_key
 from utils.vectors import *
 from view.view import View
@@ -56,17 +57,23 @@ class Sprite:
         return copy.copy(self)
 
 
-    def contains(self, x : int , y : int):
+    def contains(self, view, screen_x : int , screen_y : int):
         ''' 
         Check if the sprite contains the mouse coordinate 
         taking transparent pixels (opacity) into account.
         '''
         w, h = self.image.get_size()
-        if x < 0 or x > w or y < 0 or y > h:
-            return False
-        else:
-            pixel = self.image.get_at((x, y))
-            if pixel[3] < 200:
+        position = view.project(self.get_location())
+        rel_x = int(screen_x - position.x + w / 2)
+        rel_y = int(screen_y - position.y + h / 2)
+        w, h = self.image.get_size()
+        if rel_x > 0 and rel_x < w and rel_y > 0 and rel_y < h:
+            pixel = self.image.get_at((rel_x, rel_y))
+            if pixel.a > 0:
                 return self
             else:
                 return False
+
+
+    def __str__(self):
+        return f"Sprite {get_path(self.image)}"

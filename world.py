@@ -24,11 +24,11 @@ class World:
         self.chopper = Chopper(self)
 
         self.create_building()
-        self.create_paths()
-        self.place_peripheral_objects()
+        # self.create_paths()
+        # self.place_objects()
 
 
-    def place_peripheral_objects(self):
+    def place_objects(self):
         ''' Create ground - thst is - the terrain and the roads. '''
         self.place("land.png", layer = Layer.TERRAIN_LAYER)
         self.place("roads.png", layer = Layer.OVERLAYS_LAYER)
@@ -113,7 +113,7 @@ class World:
 
         self.time += clock.get_time()
 
-        self.spawn_cars(clock)
+        # self.spawn_cars(clock)
         self.update_cars(clock, speed)
 
         self.building.update(clock)

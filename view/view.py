@@ -111,13 +111,10 @@ class View:
 
     def pick(self, x, y):
         for sprite in self.sprites:
-            sprite = self.sprites[7]
+            # sprite = self.sprites[1]
             if sprite.layer == Layer.OBJECTS_LAYER:
-                position = self.project(sprite.get_location())
-                x -= position.x
-                y -= position.y
-                print(x)
-                if sprite.contains(int(x), int(y)):
+                
+                if sprite.contains(self, int(x), int(y)):
                     return sprite
 
 

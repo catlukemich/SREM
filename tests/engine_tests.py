@@ -51,7 +51,7 @@ class PickingTest(Test):
     def on_event(self, event):
         super().on_event()
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            x,y = pygame.mouse.get_pos()
+            x,y = event.pos
             result = self.main.view.pick(x, y)
             print(result)
     

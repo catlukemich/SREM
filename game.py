@@ -38,7 +38,7 @@ class Game:
         self.speed = 1 # <-- The game speed - int in range 1 - 4
 
         self.tests = [
-            PlacingTest(self),
+            # PlacingTest(self),
             PickingTest(self)
         ]
         # <-- The current tests to pefrrm while initializing
@@ -97,7 +97,7 @@ class Game:
 
 
 if __name__ == "__main__":
-    w = 1024
-    h = 640
+    w = 800
+    h = 420
     game = Game(w, h)
     game.loop()

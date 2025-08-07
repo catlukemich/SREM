@@ -3,7 +3,7 @@ import os
 import pygame.image
 
 images = {} # The cache of images
-
+paths = {} # Pahts - map from image to string
 def load_image(path):
     filepath = "assets" + os.sep + path
 
@@ -12,6 +12,7 @@ def load_image(path):
         try:
             image = pygame.image.load(filepath).convert_alpha()
             images[filepath] = image
+            paths[image] = filepath
             return image  
         except Exception as e:
             print("Cant load image: " + filepath)
@@ -19,6 +20,10 @@ def load_image(path):
     else:
         # Else just return the cached image:
         return images[filepath]
+
+
+def get_path(image):
+    return paths[image]
 
 fonts = {}
 
