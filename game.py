@@ -97,7 +97,7 @@ class Game:
 
 
 if __name__ == "__main__":
-    w = 800
-    h = 440
+    w = 1024
+    h = 640
     game = Game(w, h)
     game.loop()

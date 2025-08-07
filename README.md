@@ -9,6 +9,14 @@ Consider donating to this project (and other too) if you feel satisfied with the
 
 ## A minigame where player becomes a Single Real Estate Manager
 
+<div align="center">
+
+
+[![](https://i.imgur.com/EMr4hyh.png)]()
+
+
+</div>
+
 Run a company that manages a single real estate building - 
 offices building in an unknown city. Upgrade the building
 by adding floors, build a helipad on top of a building to earn
@@ -16,20 +24,13 @@ additional money from the rents. Set the rents carefully to keep
 the inhabitants content, or else, if the get angry will start 
 devastating the building floors making them inhabitable. 
 
-<div align="center">
-
-![](https://i.imgur.com/7FM2n0Z.png)
-![](https://i.imgur.com/0HFTZC3.png)
-![](https://i.imgur.com/dztQPdd.png)
-
-</div>
 
 ## Running the game
 
 Provided you have Python 3 with the pygame library installed, run the command
 
-`python main.py`
-
+`python game.py`
+  
 ## Guide
 
 The main goal of the game is simple - gather as much funds as fast as you can.

@@ -12,7 +12,7 @@ def load_image(path):
         try:
             image = pygame.image.load(filepath).convert_alpha()
             images[filepath] = image
-            return image
+            return image  
         except Exception as e:
             print("Cant load image: " + filepath)
             raise e
