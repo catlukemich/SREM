@@ -199,15 +199,15 @@ class Interface(CleanerStateListener):
 
         font = assets.load_font("Teko-Regular.ttf", 16)
         contentment_txt = gui.Text("Contentment", font)
-        contentment_txt.set_position(vec2(600 - 74, h - 114))
+        contentment_txt.set_position(vec2(w - 74, h - 114))
         self.contentment_gauge_controls.append(contentment_txt)
 
         self.contentment_icon = gui.ImageWidget(assets.load_image("happy.png"))
-        self.contentment_icon.set_position(vec2(600 - 54, h - 96))
+        self.contentment_icon.set_position(vec2(w - 54, h - 96))
         self.contentment_gauge_controls.append(self.contentment_icon)
 
         contentment_bg = gui.ImageWidget(assets.load_image("contentment_bg.png"))
-        contentment_bg.set_position(vec2(600 - 146, h - 116))
+        contentment_bg.set_position(vec2(w - 146, h - 116))
         self.contentment_gauge_controls.append(contentment_bg)
 
     def display_contentment_gauge(self):
@@ -223,16 +223,16 @@ class Interface(CleanerStateListener):
         date_font = assets.load_font("Teko-Regular.ttf", 14)
 
         self.date_month_txt = gui.Text("Month: 1", date_font)
-        self.date_month_txt.set_position(vec2(600 - 50, h - 62))
+        self.date_month_txt.set_position(vec2(w - 50, h - 62))
         self.date_gauge_controls.append(self.date_month_txt)
 
         self.date_day_txt = gui.Text("Day: 1", date_font)
-        self.date_day_txt.set_position(vec2(600 - 45, h - 48))
+        self.date_day_txt.set_position(vec2(w - 45, h - 48))
         self.date_gauge_controls.append((self.date_day_txt))
 
         date_bg_img = assets.load_image("date_bg.png")
         date_bg_widget = gui.ImageWidget(date_bg_img)
-        date_bg_widget.set_position(vec2(600 - 146, h - 65))
+        date_bg_widget.set_position(vec2(w - 146, h - 65))
         self.date_gauge_controls.append(date_bg_widget)
 
     def display_date_gauge(self):
@@ -249,11 +249,11 @@ class Interface(CleanerStateListener):
         font = assets.load_font("Teko-Bold.ttf", 16)
         funds = player.get_funds()
         self.funds_gauge_txt = gui.Text("Funds: $" + str(funds), font, (255, 255, 255))
-        self.funds_gauge_txt.set_position(vec2(600 - 134, h - 22))
+        self.funds_gauge_txt.set_position(vec2(w- 134, h - 22))
         self.funds_gauge_controls.append(self.funds_gauge_txt)
 
         funds_gauge_bg = gui.ImageWidget(assets.load_image("funds_gauge_bg.png"))
-        funds_gauge_bg.set_position(vec2(600 - 173, h - 31))
+        funds_gauge_bg.set_position(vec2(w - 173, h - 31))
         self.funds_gauge_controls.append(funds_gauge_bg)
 
     def display_funds_gauge(self):

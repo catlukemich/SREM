@@ -74,13 +74,13 @@ class Gui:
 
 class Widget:
     def __init__(self):
-        self.posiition = vec2(0, 0)
+        self.position = vec2(0, 0)
         self.dimensions = vec2(0, 0)
 
 
     def contains(self, point):
-        if point.x > self.posiition.x and point.x < self.posiition.x + self.dimensions.x \
-                and point.y > self.posiition.y and point.y < self.posiition.y + self.dimensions.y:
+        if point.x > self.position.x and point.x < self.position.x + self.dimensions.x \
+                and point.y > self.position.y and point.y < self.position.y + self.dimensions.y:
             return True
         else:
             return False
@@ -100,11 +100,18 @@ class Widget:
     def draw(self, screen):
         pass
 
+    def align_right(self):
+        w, _ = pygame.display.get_surface().get_size()
+        if hasattr(self, 'image'):
+            im_w, _ = self.image.get_size()
+            new_x = w - im_w
+            self.set_position(new_x, self.position.y)
+
     def set_position(self, position):
-        self.posiition = position
+        self.position = position
 
     def get_position(self):
-        return self.posiition
+        return self.position
 
 
 class ImageWidget(Widget):
@@ -115,7 +122,7 @@ class ImageWidget(Widget):
         self.dimensions = vec2(w, h)
 
     def draw(self, screen):
-        screen.blit(self.image, (self.posiition.x, self.posiition.y))
+        screen.blit(self.image, (self.position.x, self.position.y))
 
     def set_image(self, image):
         self.image = image
@@ -130,7 +137,7 @@ class Button(Widget):
         self.dimensions = vec2(w, h)
 
     def draw(self, screen):
-        screen.blit(self.image, (self.posiition.x, self.posiition.y))
+        screen.blit(self.image, (self.position.x, self.position.y))
 
     def on_click(self):
         if self.command is not None:
@@ -163,7 +170,7 @@ class Text(Widget):
         self.surface = self.font.render(self.text, True, self.color)
 
     def draw(self, screen):
-        screen.blit(self.surface, (self.posiition.x, self.posiition.y))
+        screen.blit(self.surface, (self.position.x, self.position.y))
 
 
 class Slider(Widget):
@@ -186,13 +193,13 @@ class Slider(Widget):
         rail_w, rail_h = self.rail_img.get_size()
         knob_w, knob_h = self.knob_img.get_size()
         rail_y = (knob_h - rail_h) / 2
-        screen.blit(self.rail_img, (self.posiition.x, self.posiition.y + rail_y))
-        screen.blit(self.knob_img, (self.posiition.x + self.knob_x, self.posiition.y))
+        screen.blit(self.rail_img, (self.position.x, self.position.y + rail_y))
+        screen.blit(self.knob_img, (self.position.x + self.knob_x, self.position.y))
 
 
     def onmousedrag(self, event):
-        rel_x = event.pos[0] - self.posiition.x
-        rel_y = event.pos[1] - self.posiition.y
+        rel_x = event.pos[0] - self.position.x
+        rel_y = event.pos[1] - self.position.y
 
         if rel_x > 0 and rel_x < self.dimensions.x and rel_y > 0 and rel_y < self.dimensions.y:
             percentage = rel_x / (self.dimensions.x) * 100

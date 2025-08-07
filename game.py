@@ -1,3 +1,4 @@
+import os
 import pygame
 from pygame.locals import *
 import assets
@@ -15,8 +16,9 @@ class Game:
 
     def __init__(self, w, h):
         # Screen setup
+        os.environ['SDL_VIDEO_WINDOW_POS'] = '300,40' 
         pygame.init()
-        self.window = pygame.display.set_mode((w, h))
+        self.window = pygame.display.set_mode((w, h) ) # TODO Use scaled mode in the future for pixel art
         pygame.display.set_caption("SREM")
         pygame.display.set_icon(assets.load_image("icon.png"))
         # The onscreen display objects creation:
@@ -89,6 +91,6 @@ class Game:
 
 if __name__ == "__main__":
     w = 800
-    h = 600
+    h = 440
     game = Game(w, h)
     game.loop()

@@ -17,5 +17,6 @@
     },
     "path-autocomplete.pathMappings": {
         "" :"./"
-    }
+    },
+    "todo-tree.tree.scanMode": "workspace only"
 }
