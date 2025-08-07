@@ -54,3 +54,19 @@ class Sprite:
     def copy(self):
         import copy
         return copy.copy(self)
+
+
+    def contains(self, x, y):
+        ''' 
+        Check if the sprite contains the mouse coordinate 
+        taking transparent pixels (opacity) into account.
+        '''
+        w, h = self.image.get_size()
+        if x < 0 or x > w or y < 0 or y > h:
+            return False
+        else:
+            pixel = self.image.get_at(x, y)
+            if pixel[3] < 200:
+                return self
+            else:
+                return False

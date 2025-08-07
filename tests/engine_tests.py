@@ -35,8 +35,9 @@ class PlacingTest(Test):
         self.placeable.set_location(loc)
         
     def on_event(self, event):
+        ''' Placing test with MMB'''
         super().on_event()
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 2:
             x,y = pygame.mouse.get_pos()
             loc = self.main.view.unproject(vec2(x, y))
             self.placeable.set_location(loc)
@@ -45,5 +46,12 @@ class PlacingTest(Test):
             placed = self.placeable.copy()
             self.main.view.add_sprite(placed)
 
-
+class PickingTest(Test):
+    ''' Picking test with LMB '''
+    def on_event(self, event):
+        super().on_event()
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            x,y = pygame.mouse.get_pos()
+            result = self.main.view.pick(x, y)
+            print(result)
     

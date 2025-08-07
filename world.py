@@ -7,6 +7,7 @@ from vehicles.chopper import *
 from constants import *
 from utils.vectors import *
 from path import *
+from purchasable import *
 
 class World:
     '''
@@ -24,10 +25,10 @@ class World:
 
         self.create_building()
         self.create_paths()
-        self.place_objects()
+        self.place_peripheral_objects()
 
 
-    def place_objects(self):
+    def place_peripheral_objects(self):
         ''' Create ground - thst is - the terrain and the roads. '''
         self.place("land.png", layer = Layer.TERRAIN_LAYER)
         self.place("roads.png", layer = Layer.OVERLAYS_LAYER)
@@ -36,8 +37,8 @@ class World:
         self.place("parking.png", (1.6, -6, 0))
 
         ''' Create the factory in the top-right corner of the screen '''
-        self.place("factory.png", (-3.05, -9, 0))
-        self.place("factory-pixel.png", (-3.25, -3.8, 0))
+        self.place("factory.png", (-3.05, -9, 0), purchasable=Purchasable(200, 100, 150))
+        self.place("factory-pixel.png", (-3.25, -3.8, 0), purchasable=Purchasable(300, 130, 270))
         self.place("foundation.png", (-2.899, 2.968, 0))
 
 
@@ -55,16 +56,22 @@ class World:
         view.add_sprite(self.building)
 
 
-    def place(self, image_path, loc : tuple = (0, 0, 0), layer = Layer.OBJECTS_LAYER):
-            ''' Utility inner function for placing new sprites '''
+    def place(self, image_path, loc : tuple = (0, 0, 0), layer = Layer.OBJECTS_LAYER, purchasable = None):
+            ''' 
+            Utility inner function for placing new sprites 
+            like eyecandy parks, factories and other real estates
+            '''
             view = self.main.view
-            building = Sprite(load_image(image_path))
-            building.set_layer(layer)
+            placeable = Sprite(load_image(image_path))
+            placeable.set_layer(layer)
             location = vec3(loc[0], loc[1], loc[2])
-            building.set_location(location)
+            placeable.set_location(location)
 
-            view.add_sprite(building)
-            return building
+            if purchasable:
+                placeable.purchasable = purchasable
+
+            view.add_sprite(placeable)
+            return placeable
 
 
     def create_paths(self):
@@ -73,14 +80,14 @@ class World:
         '''
         paths = [
             # Bottom row
-            path = Path(vec3(6.25, 15), vec3(6.25, -12.5), Heading.NORTH),
-            path = Path(vec3(5.75, -12.5), vec3(5.75, 15),  Heading.SOUTH),
+            Path(vec3(6.25, 15), vec3(6.25, -12.5), Heading.NORTH),
+            Path(vec3(5.75, -12.5), vec3(5.75, 15),  Heading.SOUTH),
             # Middle row
-            path = Path(vec3(0.25, 10), vec3(0.25, -12.5), Heading.NORTH),
-            path = Path(vec3(-0.25, -12.5), vec3(-0.25, 10), Heading.SOUTH)
+            Path(vec3(0.25, 10), vec3(0.25, -12.5), Heading.NORTH),
+            Path(vec3(-0.25, -12.5), vec3(-0.25, 10), Heading.SOUTH),
             # Top row
-            path = Path(vec3(-5.75, 26), vec3(-5.75, -26.5), Heading.NORTH)
-            path = Path(vec3(-6.25, -36.5), vec3(-6.25, 36), Heading.SOUTH)
+            Path(vec3(-5.75, 26), vec3(-5.75, -26.5), Heading.NORTH),
+            Path(vec3(-6.25, -36.5), vec3(-6.25, 36), Heading.SOUTH)
         ]
 
         for path in paths:
@@ -102,7 +109,6 @@ class World:
             if self.day == 30:
                 self.building.update_contentment()
                 player = self.main.player
-                self.on_day(self.month, self.day)
                 player.on_day(self.month, self.day)
 
         self.time += clock.get_time()

@@ -1,7 +1,9 @@
-from .spritelist import *
-from functools import cmp_to_key
-from utils.vectors import *
 import pygame
+from functools import cmp_to_key
+from constants import *
+from utils.vectors import *
+from .sprite import *
+from .spritelist import *
 
 HTW = 36
 HTH = 18
@@ -12,7 +14,7 @@ class View:
     def __init__(self, window):
         self.center = vec2(0, 0) # <-- The center of the view relative to the world's center
         self.window = window # <-- Reference to the window instance for drawing purposes
-        self.sprites = [] # <-- List of sprites in the view
+        self.sprites: list[Sprite] = [] # <-- List of sprites in the view
         self.scroll_button_down = False # <-- Is the scrolling mouse button pressed
 
 
@@ -106,6 +108,17 @@ class View:
         iso_x = (position.x * HTH + position.y * HTW + HTH * 1 * iso_z) / (2 * HTW * HTH) 
         iso_y = iso_x - position.x / HTW 
         return vec3(iso_x + self.center.x , iso_y + self.center.y , iso_z)
+
+    def pick(self, x, y):
+        for sprite in self.sprites:
+            if sprite.layer == Layer.OBJECTS_LAYER:
+                position = self.project(sprite.get_location())
+                x -= position.x
+                y -= position.y
+                if sprite.contains(x, y):
+                    return sprite
+
+
 
     def handle_event(self, event):
         ''' 

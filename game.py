@@ -8,7 +8,7 @@ import world
 import ui.interface as interface
 from utils.vectors import *
 from tkinter import *
-from tests.test import *
+from tests.engine_tests import *
 
 # The main game class that is intantiated on startup.
 class Game:
