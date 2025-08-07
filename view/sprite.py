@@ -1,5 +1,5 @@
 from functools import cmp_to_key
-from vectors import *
+from utils.vectors import *
 from view.view import View
 
 

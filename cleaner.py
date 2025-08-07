@@ -1,7 +1,7 @@
 from assets import load_image
 from constants import Layer
 from view.sprite import Sprite
-from vectors import vec3
+from utils.vectors import vec3
 
 
 

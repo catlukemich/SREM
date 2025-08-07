@@ -1,6 +1,6 @@
 import pygame
 
-from gui import Widget
+from ui.gui import Widget
 
 
 class Graph(Widget):

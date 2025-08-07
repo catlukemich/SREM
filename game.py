@@ -3,12 +3,12 @@ from pygame.locals import *
 import assets
 import player
 import view.sprite as sprite
-import gui
+import ui.gui as gui
 import world
-import interface
-from vectors import *
+import ui.interface as interface
+from utils.vectors import *
 from tkinter import *
-from test import *
+from tests.test import *
 
 # The main game class that is intantiated on startup.
 class Game:
@@ -26,7 +26,6 @@ class Game:
         self.player = player.Player(self)
         # World creation
         self.world = world.World(self)
-        self.world.display()
         # Interface creation
         self.interface = interface.Interface(self)
         self.interface.display()

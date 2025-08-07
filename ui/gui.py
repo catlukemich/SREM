@@ -1,5 +1,5 @@
 import pygame
-from vectors import vec2
+from utils.vectors import vec2
 
 
 class Gui:

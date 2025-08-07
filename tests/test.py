@@ -2,7 +2,7 @@ import abc
 import pygame
 from view.sprite import Sprite
 from pygame.locals import *
-from vectors import *
+from utils.vectors import *
 from tkinter import *
 
 

@@ -1,11 +1,11 @@
 import random
 import pygame
-from utlis import *
-from building import *
-from car import *
-from chopper import *
+from utils.utlis import *
+from buildings.building import *
+from vehicles.car import *
+from vehicles.chopper import *
 from constants import *
-from vectors import *
+from utils.vectors import *
 from path import *
 
 class World:
@@ -23,11 +23,22 @@ class World:
         self.chopper = Chopper(self)
 
         self.create_building()
-        self.create_ground()
-        self.create_parks()
-        self.create_parking()
-        self.create_factory()
         self.create_paths()
+        self.place_objects()
+
+
+    def place_objects(self):
+        ''' Create ground - thst is - the terrain and the roads. '''
+        self.place("land.png", layer = Layer.TERRAIN_LAYER)
+        self.place("roads.png", layer = Layer.OVERLAYS_LAYER)
+        self.place("park1.png", (9,9,0))
+        self.place("park2.png", (3.1, 9, 0))
+        self.place("parking.png", (1.6, -6, 0))
+
+        ''' Create the factory in the top-right corner of the screen '''
+        self.place("factory.png", (-3.05, -9, 0))
+        self.place("factory-pixel.png", (-3.25, -3.8, 0))
+        self.place("foundation.png", (-2.899, 2.968, 0))
 
 
     def get_month(self):
@@ -36,75 +47,25 @@ class World:
     def get_day(self):
         return self.day
 
-    def display(self):
-        view = self.main.view
-        view.add_sprite(self.roads)
-        self.building.display()
-        
-        view.add_sprite(self.park1)
-        view.add_sprite(self.park2)
-        view.add_sprite(self.parking)
-
-    def create_ground(self):
-        '''
-        Create ground - thst is - the terrain and the roads.
-        '''
-        view = self.main.view
-        self.terrain = Sprite(load_image("land.png"))
-        self.terrain.set_layer(Layer.TERRAIN_LAYER)
-        view.add_sprite(self.terrain)
-        self.roads = Sprite(load_image("roads.png"))
-        self.roads.set_layer(Layer.OVERLAYS_LAYER)
 
     def create_building(self):
-        '''
-        Create the main building, the Real Estate
-        '''
+        ''' Create the main building, the Real Estate '''
         view = self.main.view
 
         self.building = Building(view)
+        self.building.add_to_view()
 
-    def create_factory(self):
-        '''
-        Create the factory in the top-right corner of the screen
-        '''
-
-        view = self.main.view
-        def place(image_path, loc : tuple):
+    def place(self, image_path, loc : tuple = (0, 0, 0), layer = Layer.OBJECTS_LAYER):
             ''' Utility inner function for placing new sprites '''
+            view = self.main.view
             building = Sprite(load_image(image_path))
-            building.set_layer(Layer.OBJECTS_LAYER)
+            building.set_layer(layer)
             location = vec3(loc[0], loc[1], loc[2])
             building.set_location(location)
 
             view.add_sprite(building)
             return building
-        
-        place("factory.png", (-3.05, -9, 0))
-        place("factory-pixel.png", (-3.25, -3.8, 0))
-        place("foundation.png", (-2.899, 2.968, 0))
 
-
-    def create_parks(self):
-        '''
-        Create parks in the bottom left side of the screen
-        '''
-        view = self.main.view
-
-        self.park1 = Sprite(load_image("park1.png"))
-        self.park1.set_layer(Layer.OBJECTS_LAYER)
-        self.park1.set_location(vec3(9, 9, 0))
-
-        self.park2 = Sprite(load_image("park2.png"))
-        self.park2.set_layer(Layer.OBJECTS_LAYER)
-        self.park2.set_location(vec3(3.1, 9, 0))
-
-    def create_parking(self):
-        view = self.main.view
-
-        self.parking = Sprite(load_image("parking.png"))
-        self.parking.set_layer(Layer.OVERLAYS_LAYER)
-        self.parking.set_location(vec3(1.6, -6.0, 0))
 
     def create_paths(self):
         '''

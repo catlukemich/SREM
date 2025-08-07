@@ -1,7 +1,7 @@
 import random
 from view.sprite import *
 from constants import *
-from heading import *
+from vehicles.heading import *
 from assets import *
 
 

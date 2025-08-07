@@ -4,7 +4,7 @@ from cleaner import Cleaner
 from constants import *
 from assets import *
 from view.sprite import *
-from vectors import *
+from utils.vectors import *
 
 
 class Building:

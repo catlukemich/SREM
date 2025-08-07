@@ -2,9 +2,9 @@ import pygame.font
 
 from cleaner import Cleaner, CleanerStateListener
 from graph import Graph
-from vectors import vec2
+from utils.vectors import vec2
 import assets
-import gui
+import ui.gui as gui
 
 
 class Interface(CleanerStateListener):

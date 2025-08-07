@@ -2,7 +2,7 @@ import random
 from view.sprite import *
 from assets import *
 from path import *
-from vectors import vec2, vec3
+from utils.vectors import vec2, vec3
 from constants import *
 
 

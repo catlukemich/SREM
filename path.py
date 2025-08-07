@@ -1,7 +1,7 @@
 import pygame
 from constants import *
-from heading import *
-from vectors import *
+from vehicles.heading import *
+from utils.vectors import *
 from view.sprite import *
 
 

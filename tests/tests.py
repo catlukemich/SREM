@@ -2,7 +2,7 @@ import constants
 import view.sprite as sprite
 import assets
 from game import Game
-from vectors import vec3
+from utils.vectors import vec3
 
 class Test:
 
