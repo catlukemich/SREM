@@ -35,7 +35,6 @@ class PlacingTest(Test):
         self.placeable.set_location(loc)
         
     def on_event(self, event):
-        print("handling event")
         super().on_event()
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             x,y = pygame.mouse.get_pos()

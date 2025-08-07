@@ -4,13 +4,14 @@ from cleaner import Cleaner
 from constants import *
 from assets import *
 from view.sprite import *
+from view.spritelist import *
 from utils.vectors import *
 
 
-class Building:
+class Building(SpriteList):
     def __init__(self, view):
+        super().__init__()
         self.view = view
-        self.sprites = []
         self.level = 1
         self.helipad = None
         self.rent = 1000

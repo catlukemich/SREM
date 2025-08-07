@@ -1,3 +1,4 @@
+from .spritelist import *
 from functools import cmp_to_key
 from utils.vectors import *
 import pygame
@@ -28,9 +29,13 @@ class View:
 
 
     def add_sprite(self, sprite):
-        if not sprite in self.sprites:
-            self.sprites.append(sprite)
-
+        if isinstance(sprite, SpriteList):
+            for sprite_element in sprite:
+                if not sprite_element in self.sprites:
+                    self.sprites.append(sprite_element)
+        else:
+            if not sprite in self.sprites:
+                self.sprites.append(sprite)
 
     def remove_sprite(self, sprite):
         if sprite in self.sprites:

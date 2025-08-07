@@ -53,7 +53,8 @@ class World:
         view = self.main.view
 
         self.building = Building(view)
-        self.building.add_to_view()
+        # self.building.add_to_view()
+        view.add_sprite(self.building)
 
     def place(self, image_path, loc : tuple = (0, 0, 0), layer = Layer.OBJECTS_LAYER):
             ''' Utility inner function for placing new sprites '''
