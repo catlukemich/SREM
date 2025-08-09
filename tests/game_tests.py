@@ -44,6 +44,7 @@ class TestHelipad(Test):
         game.loop()
 
 
+
 if __name__ == "__main__":
     # assets.images_dir = "pixel"
     #test = TestAbandonment()

@@ -9,7 +9,7 @@ import world
 import ui.interface as interface
 from utils.vectors import *
 from tkinter import *
-from tests.engine_tests import *
+from tests.internal_tests import *
 
 # The main game class that is intantiated on startup.
 class Game:
@@ -39,7 +39,8 @@ class Game:
 
         self.tests = [
             # PlacingTest(self),
-            PickingTest(self)
+            # PickingTest(self),
+            TestBuying(self)
         ]
         # <-- The current tests to pefrrm while initializing
 

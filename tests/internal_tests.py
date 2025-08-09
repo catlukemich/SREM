@@ -55,3 +55,15 @@ class PickingTest(Test):
             result = self.main.view.pick(x, y)
             print(result)
     
+
+
+
+class TestBuying(Test):
+    def on_event(self, event):
+        super().on_event()
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            x,y = event.pos
+            result = self.main.view.pick(x, y)
+            from ui.buy_dialog import BuyDialog
+            d = BuyDialog(self.main.player)
+            self.main.gui.add_widget(d)

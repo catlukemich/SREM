@@ -16,9 +16,15 @@ class Gui:
     def add_widget(self, widget):
         if not isinstance(widget, Widget):
             raise Exception(str(widget) + " is not a widget")
+        if isinstance(widget, Container):
+            for widget in widget.widgets:
+                self.widgets.append(widget)
         self.widgets.append(widget)
 
     def remove_widget(self, widget):
+        if isinstance(widget, Container):
+            for widget in widget.widgets:
+                self.widgets.append(widget)
         self.widgets.remove(widget)
 
     def on_event(self, event):
@@ -100,19 +106,66 @@ class Widget:
     def draw(self, screen):
         pass
 
-    def align_right(self):
-        w, _ = pygame.display.get_surface().get_size()
-        if hasattr(self, 'image'):
-            im_w, _ = self.image.get_size()
-            new_x = w - im_w
+    def align_right(self, container = None, offset = 0):
+        own_w = self.dimensions.x
+        if container:
+            new_x = container.position.x + container.dimensions.x - offset
             self.set_position(new_x, self.position.y)
+            return
+
+        w = pygame.display.get_surface().get_width()
+        if hasattr(self, 'image'):
+            new_x = w - own_w - offset
+            self.set_position(new_x, self.position.y)
+        return self
+    
+    def align_left(self, container = None, offset = 0):
+        if container:
+            new_x = container.position.x + offset
+            self.set_position(new_x, self.position.y)
+            return
+
+        if hasattr(self, 'image'):
+            new_x = offset
+            self.set_position(new_x, self.position.y)
+        return self
+
+    def center_horizontally(self, container = None):
+        left = right = 0
+        if container:
+            left = container.position.x
+            right = container.position.y
+        else:
+            right = pygame.display.get_surface().get_width()
+
+        own_width = self.dimensions.x
+        new_x = left + (right - left) / 2 - own_width / 2
+        self.set_position(vec2(new_x, self.position.y))
+        print(new_x)
+
 
     def set_position(self, position):
         self.position = position
+        return self
 
     def get_position(self):
         return self.position
+        
 
+class Container(Widget):
+    def __init__(self):
+        super().__init__()
+        self.widgets: list[Widget] = [] # PRIVATE
+
+    def set_position(self, position):
+        delta_x = position.x - self.position.x
+        delta_y = position.y - self.position.y
+        for widget in self.widgets:
+            w_pos = widget.get_position()
+            w_pos.x += delta_x
+            w_pos.y += delta_y
+        return super().set_position(position)
+    
 
 class ImageWidget(Widget):
     def __init__(self, image):
@@ -150,8 +203,9 @@ class Button(Widget):
         pygame.mouse.set_cursor(*pygame.cursors.arrow)
 
 class Text(Widget):
-    def __init__(self, text, font, color=(0, 0, 0)):
+    def __init__(self, text, font, color=(0, 0, 0), command = None):
         Widget.__init__(self)
+        self.command = command
         self.text = text
         self.font = font
         self.color = color
@@ -161,16 +215,22 @@ class Text(Widget):
     def set_text(self, text):
         self.text = text
         self.create_surface()
+        return self
 
     def set_color(self, color):
         self.color = color
         self.create_surface()
+        return self
 
     def create_surface(self):
         self.surface = self.font.render(self.text, True, self.color)
 
     def draw(self, screen):
         screen.blit(self.surface, (self.position.x, self.position.y))
+
+    def on_click(self):
+        if self.command:
+            return self.command()
 
 
 class Slider(Widget):

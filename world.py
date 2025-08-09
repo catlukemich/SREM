@@ -24,8 +24,8 @@ class World:
         self.chopper = Chopper(self)
 
         self.create_building()
-        # self.create_paths()
-        # self.place_objects()
+        self.create_paths()
+        self.place_objects()
 
 
     def place_objects(self):
