@@ -10,12 +10,17 @@ class Test:
     def __init__(self, main):
         self.main = main
 
+
+    @abc.abstractmethod
+    def onInit(self):
+        pass
+
     @abc.abstractmethod
     def update(self, main, clock):
         pass
 
     @abc.abstractmethod
-    def on_event(self):
+    def onEvent(self, event: pygame.event.Event):
         pass
 
 
@@ -34,9 +39,9 @@ class PlacingTest(Test):
         loc = self.main.view.unproject(vec2(x, y))
         self.placeable.set_location(loc)
         
-    def on_event(self, event):
+    def onEvent(self, event):
         ''' Placing test with MMB'''
-        super().on_event()
+        super().onEvent()
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 2:
             x,y = pygame.mouse.get_pos()
             loc = self.main.view.unproject(vec2(x, y))
@@ -48,8 +53,8 @@ class PlacingTest(Test):
 
 class PickingTest(Test):
     ''' Picking test with LMB '''
-    def on_event(self, event):
-        super().on_event()
+    def onEvent(self, event):
+        super().onEvent()
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             x,y = event.pos
             result = self.main.view.pick(x, y)
@@ -59,11 +64,8 @@ class PickingTest(Test):
 
 
 class TestBuying(Test):
-    def on_event(self, event):
-        super().on_event()
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            x,y = event.pos
-            result = self.main.view.pick(x, y)
-            from ui.buy_dialog import BuyDialog
-            d = BuyDialog(self.main.player)
-            self.main.gui.add_widget(d)
+
+    def onInit(self):
+        from ui.buy_dialog import BuyDialog
+        d = BuyDialog(self.main.player)
+        self.main.gui.add_widget(d)

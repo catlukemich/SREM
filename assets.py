@@ -27,7 +27,7 @@ def get_path(image):
 
 fonts = {}
 
-def load_font(path, size):
+def loadFont(path, size):
     filepath = "assets" + os.sep + path
     key = filepath + str(size)
     if not key in fonts:

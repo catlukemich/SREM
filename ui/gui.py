@@ -15,10 +15,10 @@ class Gui:
 
     def add_widget(self, widget):
         if not isinstance(widget, Widget):
-            raise Exception(str(widget) + " is not a widget")
+            raise Exception(str(child_widget) + " is not a widget")
         if isinstance(widget, Container):
-            for widget in widget.widgets:
-                self.widgets.append(widget)
+            for child_widget in widget.widgets:
+                self.widgets.append(child_widget)
         self.widgets.append(widget)
 
     def remove_widget(self, widget):
@@ -104,33 +104,30 @@ class Widget:
         pass
 
     def draw(self, screen):
+        print(f"drawing self: {self}")
         pass
 
-    def align_right(self, container = None, offset = 0):
+    def alignRight(self, container = None, offset = 0):
         own_w = self.dimensions.x
         if container:
-            new_x = container.position.x + container.dimensions.x - offset
-            self.set_position(new_x, self.position.y)
-            return
-
-        w = pygame.display.get_surface().get_width()
-        if hasattr(self, 'image'):
+            new_x = container.position.x + container.dimensions.x - offset - own_w
+            self.set_position(vec2(new_x, self.position.y))
+        else:
+            w = pygame.display.get_surface().get_width()
             new_x = w - own_w - offset
-            self.set_position(new_x, self.position.y)
+            self.set_position(vec2(new_x, self.position.y))
         return self
     
-    def align_left(self, container = None, offset = 0):
+    def alignLeft(self, container = None, offset = 0):
         if container:
             new_x = container.position.x + offset
-            self.set_position(new_x, self.position.y)
-            return
-
-        if hasattr(self, 'image'):
+            self.set_position(vec2(new_x, self.position.y))
+        else:
             new_x = offset
-            self.set_position(new_x, self.position.y)
+            self.set_position(vec2(new_x, self.position.y))
         return self
 
-    def center_horizontally(self, container = None):
+    def centerHorizontally(self, container = None):
         left = right = 0
         if container:
             left = container.position.x
@@ -141,12 +138,15 @@ class Widget:
         own_width = self.dimensions.x
         new_x = left + (right - left) / 2 - own_width / 2
         self.set_position(vec2(new_x, self.position.y))
-        print(new_x)
+        # print(f"own width is: {new_x}")
 
 
     def set_position(self, position):
         self.position = position
         return self
+    
+    def setTop(self, top):
+        self.set_position(vec2(self.position.x, top))
 
     def get_position(self):
         return self.position
@@ -166,6 +166,15 @@ class Container(Widget):
             w_pos.y += delta_y
         return super().set_position(position)
     
+    def setBackground(self, color: tuple):
+        self.surface = pygame.surface.Surface(pygame.display.get_surface().get_size(), pygame.SRCALPHA)
+        rect = pygame.rect.Rect(self.position.x, self.position.y, self.dimensions.x, self.dimensions.y)
+        pygame.draw.rect(self.surface, color, rect)
+        print(f"rect: {rect}")
+        # print(f"pygame.display.get_surface().get_size(): {pygame.display.get_surface().get_size()}")
+
+    def draw(self, screen):
+        screen.blit(self.surface, (0,0))
 
 class ImageWidget(Widget):
     def __init__(self, image):
@@ -224,6 +233,8 @@ class Text(Widget):
 
     def create_surface(self):
         self.surface = self.font.render(self.text, True, self.color)
+        w, h = self.surface.get_size()
+        self.dimensions = vec2(w,h)
 
     def draw(self, screen):
         screen.blit(self.surface, (self.position.x, self.position.y))

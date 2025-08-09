@@ -37,12 +37,14 @@ class Game:
 
         self.speed = 1 # <-- The game speed - int in range 1 - 4
 
-        self.tests = [
+        self.tests = [ # <-- The current tests to pefrrm while initializing
             # PlacingTest(self),
             # PickingTest(self),
             TestBuying(self)
         ]
-        # <-- The current tests to pefrrm while initializing
+        for test in self.tests:
+            test.onInit()
+            
 
     def loop(self):
         while not self.done:
@@ -55,7 +57,7 @@ class Game:
                 # 2. The UI layer
                 # 3. The main world view
                 for test in self.tests:
-                    test.on_event(event)
+                    test.onEvent(event)
                 if os_wants_quit or esc_pressed:
                     self.done = True
                 else:

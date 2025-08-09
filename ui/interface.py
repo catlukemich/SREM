@@ -72,7 +72,7 @@ class Interface(CleanerStateListener):
         w, h = thegui.get_size()
         y = 260
 
-        font = assets.load_font("Teko-Bold.ttf", 24)
+        font = assets.loadFont("Teko-Bold.ttf", 24)
         upgrade_text = gui.Text("Upgrade", font)
         upgrade_text.set_position(vec2(10, h - y + 10))
         self.upgrade_button_controls.append(upgrade_text)
@@ -81,7 +81,7 @@ class Interface(CleanerStateListener):
         upgrade_button.set_position(vec2(0, h - y))
         self.upgrade_button_controls.append(upgrade_button)
 
-        font2 = assets.load_font("Teko-Bold.ttf", 16)
+        font2 = assets.loadFont("Teko-Bold.ttf", 16)
         upgrade_cost_str = "$" + str(world.building.get_upgrade_cost())
         upgrade_cost_txt = gui.Text(upgrade_cost_str, font2, (255, 255, 255))
         upgrade_cost_txt.set_position(vec2(20, h - y + 35))
@@ -107,7 +107,7 @@ class Interface(CleanerStateListener):
         w, h = thegui.get_size()
         y = 200
 
-        font = assets.load_font("Teko-Bold.ttf", 24)
+        font = assets.loadFont("Teko-Bold.ttf", 24)
         helipad_text = gui.Text("Helipad", font)
         helipad_text.set_position(vec2(10, h - y + 10))
         self.helipad_button_controls.append(helipad_text)
@@ -116,7 +116,7 @@ class Interface(CleanerStateListener):
         helipad_button.set_position(vec2(0, h - y))
         self.helipad_button_controls.append(helipad_button)
 
-        font2 = assets.load_font("Teko-Bold.ttf", 16)
+        font2 = assets.loadFont("Teko-Bold.ttf", 16)
         helipad_cost_str = "$" + str(5000)
         helipad_cost_txt = gui.Text(helipad_cost_str, font2, (255, 255, 255))
         helipad_cost_txt.set_position(vec2(20, h - y + 35))
@@ -141,7 +141,7 @@ class Interface(CleanerStateListener):
         w, h = thegui.get_size()
         y = 140
 
-        font = assets.load_font("Teko-Bold.ttf", 24)
+        font = assets.loadFont("Teko-Bold.ttf", 24)
         clean_text = gui.Text("Clean", font)
         clean_text.set_position(vec2(10, h - y + 10))
         self.clean_button_controls.append(clean_text)
@@ -150,7 +150,7 @@ class Interface(CleanerStateListener):
         clean_button.set_position(vec2(0, h - y))
         self.clean_button_controls.append(clean_button)
 
-        font2 = assets.load_font("Teko-Bold.ttf", 16)
+        font2 = assets.loadFont("Teko-Bold.ttf", 16)
         clean_cost_str = "$" + str(world.building.get_upgrade_cost())
         clean_cost_txt = gui.Text(clean_cost_str, font2, (255, 255, 255))
         clean_cost_txt.set_position(vec2(20, h - y + 35))
@@ -172,7 +172,7 @@ class Interface(CleanerStateListener):
         thegui = self.main.gui
         w, h = thegui.get_size()
 
-        font = assets.load_font("Teko-Regular.ttf", 16)
+        font = assets.loadFont("Teko-Regular.ttf", 16)
         self.rent_amount_text = gui.Text("Rent: $1000", font)
         self.rent_amount_text.set_position(vec2(10, h - 56))
         self.rent_slider_controls.append(self.rent_amount_text)
@@ -197,7 +197,7 @@ class Interface(CleanerStateListener):
 
         w, h = thegui.get_size()
 
-        font = assets.load_font("Teko-Regular.ttf", 16)
+        font = assets.loadFont("Teko-Regular.ttf", 16)
         contentment_txt = gui.Text("Contentment", font)
         contentment_txt.set_position(vec2(w - 74, h - 114))
         self.contentment_gauge_controls.append(contentment_txt)
@@ -220,7 +220,7 @@ class Interface(CleanerStateListener):
 
         w, h = thegui.get_size()
 
-        date_font = assets.load_font("Teko-Regular.ttf", 14)
+        date_font = assets.loadFont("Teko-Regular.ttf", 14)
 
         self.date_month_txt = gui.Text("Month: 1", date_font)
         self.date_month_txt.set_position(vec2(w - 50, h - 62))
@@ -246,7 +246,7 @@ class Interface(CleanerStateListener):
 
         w, h = thegui.get_size()
 
-        font = assets.load_font("Teko-Bold.ttf", 16)
+        font = assets.loadFont("Teko-Bold.ttf", 16)
         funds = player.get_funds()
         self.funds_gauge_txt = gui.Text("Funds: $" + str(funds), font, (255, 255, 255))
         self.funds_gauge_txt.set_position(vec2(w- 134, h - 22))
@@ -301,7 +301,7 @@ class Interface(CleanerStateListener):
         self.graph_visible = not self.graph_visible
 
     def create_graph_controls(self):
-        font = assets.load_font("Teko-Bold.ttf", 20)
+        font = assets.loadFont("Teko-Bold.ttf", 20)
         thegui = self.main.gui
         w, h = thegui.get_size()
         x = 400
@@ -471,7 +471,7 @@ class StatusBar:
         self.background = gui.ImageWidget(background_img)
         self.background.set_position(vec2(0, h - 20))
 
-        font = assets.load_font("Teko-Regular.ttf", 18)
+        font = assets.loadFont("Teko-Regular.ttf", 18)
         self.text = gui.Text("Status bar", font)
         self.text.set_position(vec2(10, h - 18))
 
