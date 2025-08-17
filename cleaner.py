@@ -1,4 +1,4 @@
-from assets import load_image
+from assets import loadImage
 from constants import Layer
 from view.sprite import Sprite
 from utils.vectors import vec3
@@ -17,9 +17,9 @@ class Cleaner:
         self.building = building
         self.view = view
         self.cleaning = False
-        self.rollers_sprite = Sprite(load_image("building/rollers.png"))
+        self.rollers_sprite = Sprite(loadImage("building/rollers.png"))
         self.rollers_sprite.set_layer(Layer.OBJECTS_LAYER)
-        self.platform_sprite = Sprite(load_image("building/cleaner_platform.png"))
+        self.platform_sprite = Sprite(loadImage("building/cleaner_platform.png"))
         self.platform_sprite.set_layer(Layer.OBJECTS_LAYER)
         self.lines_sprites = []
         self.floors_idx_queue = []
@@ -75,7 +75,7 @@ class Cleaner:
         self.lines_sprites.clear()
 
         building_height = self.calc_building_height()
-        lines_image = load_image("building/cleaner_ropes.png")
+        lines_image = loadImage("building/cleaner_ropes.png")
         for y in range(height + 1, building_height + 1):
             sprite = Sprite(lines_image)
             sprite.set_layer(Layer.OBJECTS_LAYER)

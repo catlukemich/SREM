@@ -4,7 +4,7 @@ import pygame.image
 
 images = {} # The cache of images
 paths = {} # Pahts - map from image to string
-def load_image(path):
+def loadImage(path):
     filepath = "assets" + os.sep + path
 
     if not filepath in images:

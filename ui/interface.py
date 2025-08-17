@@ -30,10 +30,10 @@ class Interface(CleanerStateListener):
 
         self.contentment_gauge_controls = []
         self.contentment_icon = None
-        self.contentment_happy_icon = assets.load_image("happy.png")
-        self.contentment_indifferent_icon = assets.load_image("indifferent.png")
-        self.contentment_unhappy_icon = assets.load_image("unhappy.png")
-        self.contentment_very_unhappy_icon = assets.load_image("very_unhappy.png")
+        self.contentment_happy_icon = assets.loadImage("happy.png")
+        self.contentment_indifferent_icon = assets.loadImage("indifferent.png")
+        self.contentment_unhappy_icon = assets.loadImage("unhappy.png")
+        self.contentment_very_unhappy_icon = assets.loadImage("very_unhappy.png")
         self.create_contentment_gauge()
 
         self.date_gauge_controls = []
@@ -77,7 +77,7 @@ class Interface(CleanerStateListener):
         upgrade_text.set_position(vec2(10, h - y + 10))
         self.upgrade_button_controls.append(upgrade_text)
 
-        upgrade_button = gui.Button(assets.load_image("upgrade_button.png"), self.upgrade)
+        upgrade_button = gui.Button(assets.loadImage("upgrade_button.png"), self.upgrade)
         upgrade_button.set_position(vec2(0, h - y))
         self.upgrade_button_controls.append(upgrade_button)
 
@@ -88,7 +88,7 @@ class Interface(CleanerStateListener):
         self.upgrade_cost_txt = upgrade_cost_txt
         self.upgrade_button_controls.append(upgrade_cost_txt)
 
-        upgrade_cost_bg = gui.ImageWidget(assets.load_image("upgrade_cost_bg.png"))
+        upgrade_cost_bg = gui.ImageWidget(assets.loadImage("upgrade_cost_bg.png"))
         upgrade_cost_bg.set_position(vec2(0, h - y + 30))
         self.upgrade_button_controls.append(upgrade_cost_bg)
 
@@ -112,7 +112,7 @@ class Interface(CleanerStateListener):
         helipad_text.set_position(vec2(10, h - y + 10))
         self.helipad_button_controls.append(helipad_text)
 
-        helipad_button = gui.Button(assets.load_image("helipad_button.png"), self.build_helipad)
+        helipad_button = gui.Button(assets.loadImage("helipad_button.png"), self.build_helipad)
         helipad_button.set_position(vec2(0, h - y))
         self.helipad_button_controls.append(helipad_button)
 
@@ -122,7 +122,7 @@ class Interface(CleanerStateListener):
         helipad_cost_txt.set_position(vec2(20, h - y + 35))
         self.helipad_button_controls.append(helipad_cost_txt)
 
-        helipad_cost_bg = gui.ImageWidget(assets.load_image("upgrade_cost_bg.png"))
+        helipad_cost_bg = gui.ImageWidget(assets.loadImage("upgrade_cost_bg.png"))
         helipad_cost_bg.set_position(vec2(0, h - y + 30))
         self.helipad_button_controls.append(helipad_cost_bg)
 
@@ -146,7 +146,7 @@ class Interface(CleanerStateListener):
         clean_text.set_position(vec2(10, h - y + 10))
         self.clean_button_controls.append(clean_text)
 
-        clean_button = gui.Button(assets.load_image("clean_button.png"), self.clean)
+        clean_button = gui.Button(assets.loadImage("clean_button.png"), self.clean)
         clean_button.set_position(vec2(0, h - y))
         self.clean_button_controls.append(clean_button)
 
@@ -156,7 +156,7 @@ class Interface(CleanerStateListener):
         clean_cost_txt.set_position(vec2(20, h - y + 35))
         self.clean_button_controls.append(clean_cost_txt)
 
-        clean_cost_bg = gui.ImageWidget(assets.load_image("upgrade_cost_bg.png"))
+        clean_cost_bg = gui.ImageWidget(assets.loadImage("upgrade_cost_bg.png"))
         clean_cost_bg.set_position(vec2(0, h - y + 30))
         self.clean_button_controls.append(clean_cost_bg)
 
@@ -177,14 +177,14 @@ class Interface(CleanerStateListener):
         self.rent_amount_text.set_position(vec2(10, h - 56))
         self.rent_slider_controls.append(self.rent_amount_text)
 
-        rail_img = assets.load_image("slider_rail.png")
-        knob_img = assets.load_image("slider_knob.png")
+        rail_img = assets.loadImage("slider_rail.png")
+        knob_img = assets.loadImage("slider_knob.png")
 
         self.rent_slider = gui.Slider(rail_img, knob_img, self.rent_changed)
         self.rent_slider.set_position(vec2(70, h - 60))
         self.rent_slider_controls.append(self.rent_slider)
 
-        rent_slider_bg = gui.ImageWidget(assets.load_image("rent_slider_bg.png"))
+        rent_slider_bg = gui.ImageWidget(assets.loadImage("rent_slider_bg.png"))
         rent_slider_bg.set_position(vec2(0, h - 64))
         self.rent_slider_controls.append(rent_slider_bg)
 
@@ -202,11 +202,11 @@ class Interface(CleanerStateListener):
         contentment_txt.set_position(vec2(w - 74, h - 114))
         self.contentment_gauge_controls.append(contentment_txt)
 
-        self.contentment_icon = gui.ImageWidget(assets.load_image("happy.png"))
+        self.contentment_icon = gui.ImageWidget(assets.loadImage("happy.png"))
         self.contentment_icon.set_position(vec2(w - 54, h - 96))
         self.contentment_gauge_controls.append(self.contentment_icon)
 
-        contentment_bg = gui.ImageWidget(assets.load_image("contentment_bg.png"))
+        contentment_bg = gui.ImageWidget(assets.loadImage("contentment_bg.png"))
         contentment_bg.set_position(vec2(w - 146, h - 116))
         self.contentment_gauge_controls.append(contentment_bg)
 
@@ -230,7 +230,7 @@ class Interface(CleanerStateListener):
         self.date_day_txt.set_position(vec2(w - 45, h - 48))
         self.date_gauge_controls.append((self.date_day_txt))
 
-        date_bg_img = assets.load_image("date_bg.png")
+        date_bg_img = assets.loadImage("date_bg.png")
         date_bg_widget = gui.ImageWidget(date_bg_img)
         date_bg_widget.set_position(vec2(w - 146, h - 65))
         self.date_gauge_controls.append(date_bg_widget)
@@ -252,7 +252,7 @@ class Interface(CleanerStateListener):
         self.funds_gauge_txt.set_position(vec2(w- 134, h - 22))
         self.funds_gauge_controls.append(self.funds_gauge_txt)
 
-        funds_gauge_bg = gui.ImageWidget(assets.load_image("funds_gauge_bg.png"))
+        funds_gauge_bg = gui.ImageWidget(assets.loadImage("funds_gauge_bg.png"))
         funds_gauge_bg.set_position(vec2(w - 173, h - 31))
         self.funds_gauge_controls.append(funds_gauge_bg)
 
@@ -271,7 +271,7 @@ class Interface(CleanerStateListener):
 
         w, h = thegui.get_size()
 
-        self.graph_button = gui.Button(assets.load_image("graph.png"), self.toggle_graph)
+        self.graph_button = gui.Button(assets.loadImage("graph.png"), self.toggle_graph)
         self.graph_button.set_position(vec2(w - 30, h - 26))
 
     def display_graph_button(self):
@@ -307,19 +307,19 @@ class Interface(CleanerStateListener):
         x = 400
         y = h - 270
 
-        funds_button = gui.Button(assets.load_image("graph_mode_funds.png"), self.set_graph_mode_funds)
+        funds_button = gui.Button(assets.loadImage("graph_mode_funds.png"), self.set_graph_mode_funds)
         funds_button.set_position(vec2(x, y))
         funds_text = gui.Text("Funds", font, (0,0,0))
         funds_text.set_position(vec2(x + 45, y + 4))
         self.graph_controls.append(funds_text)
         self.graph_controls.append(funds_button)
 
-        self.graph_mode_indicator = gui.Button(assets.load_image("graph_mode_indicator.png"))
+        self.graph_mode_indicator = gui.Button(assets.loadImage("graph_mode_indicator.png"))
         self.graph_mode_indicator.set_position(vec2(x-34, y + 4))
         self.graph_controls.append(self.graph_mode_indicator)
 
         y += 30
-        income_button = gui.Button(assets.load_image("graph_mode_income.png"), self.set_graph_mode_income)
+        income_button = gui.Button(assets.loadImage("graph_mode_income.png"), self.set_graph_mode_income)
         income_button.set_position(vec2(x, y))
         income_text = gui.Text("Income", font, (0, 0, 0))
         income_text.set_position(vec2(x + 39, y + 4))
@@ -327,7 +327,7 @@ class Interface(CleanerStateListener):
         self.graph_controls.append(income_button)
 
         y += 30
-        contentment_button = gui.Button(assets.load_image("graph_mode_contentment.png"), self.set_graph_mode_contentment)
+        contentment_button = gui.Button(assets.loadImage("graph_mode_contentment.png"), self.set_graph_mode_contentment)
         contentment_button.set_position(vec2(x, y))
         contentment_text = gui.Text("Contentment", font, (0, 0, 0))
         contentment_text.set_position(vec2(x + 25, y + 4))
@@ -467,7 +467,7 @@ class StatusBar:
 
         w, h = thegui.get_size()
 
-        background_img = assets.load_image("status_bar_bg.png")
+        background_img = assets.loadImage("status_bar_bg.png")
         self.background = gui.ImageWidget(background_img)
         self.background.set_position(vec2(0, h - 20))
 

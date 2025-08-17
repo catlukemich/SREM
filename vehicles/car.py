@@ -25,7 +25,7 @@ class Car(Sprite):
         heading_str = "north" if heading == Heading.NORTH else "south"
         car_name = random.choice(options)
         img_name = car_name + "_" + heading_str + ".png"
-        return load_image("cars/" + img_name)
+        return loadImage("cars/" + img_name)
 
     def update(self, clock, speed):
         '''

@@ -62,7 +62,7 @@ class World:
             like eyecandy parks, factories and other real estates
             '''
             view = self.main.view
-            placeable = Sprite(load_image(image_path))
+            placeable = Sprite(loadImage(image_path))
             placeable.set_layer(layer)
             location = vec3(loc[0], loc[1], loc[2])
             placeable.set_location(location)

@@ -23,8 +23,8 @@ class BuyDialog(Container):
         self.yes.alignLeft(container=self)
         self.no.alignRight(container=self)
 
-        self.widgets.append(self.yes)
-        self.widgets.append(self.no)
+        self.widgets.append(self.yes) # TODO make the widgets adding a member
+        self.widgets.append(self.no) # function instead of accessing member variable
 
         self.setTop(30)
         self.setBackground(UIConstants.panel_color)

@@ -16,12 +16,12 @@ class Chopper(Sprite):
     MODE_LEAVING = 4
 
     def __init__(self, world):
-        Sprite.__init__(self, load_image("chopper/chopper0001.png"))
+        Sprite.__init__(self, loadImage("chopper/chopper0001.png"))
         self.world = world
         self.frames = []
         for i in range(1,5):
             frame_path = "chopper/chopper000" + str(i) + ".png"
-            frame = load_image(frame_path)
+            frame = loadImage(frame_path)
             self.frames.append(frame)
         self.curr_frame = 0
         self.set_location(vec3(3, 3, 17))

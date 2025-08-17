@@ -13,7 +13,7 @@ class Gui:
     def get_size(self):
         return self.screen.get_size()
 
-    def add_widget(self, widget):
+    def addWidget(self, widget):
         if not isinstance(widget, Widget):
             raise Exception(str(child_widget) + " is not a widget")
         if isinstance(widget, Container):
@@ -21,7 +21,7 @@ class Gui:
                 self.widgets.append(child_widget)
         self.widgets.append(widget)
 
-    def remove_widget(self, widget):
+    def removeWidget(self, widget):
         if isinstance(widget, Container):
             for widget in widget.widgets:
                 self.widgets.append(widget)
@@ -104,7 +104,6 @@ class Widget:
         pass
 
     def draw(self, screen):
-        print(f"drawing self: {self}")
         pass
 
     def alignRight(self, container = None, offset = 0):

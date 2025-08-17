@@ -3,6 +3,7 @@ import pygame
 from pygame.locals import *
 import assets
 import player
+from screens.screen import MainMenu, SplashScreen
 import view.sprite as sprite
 import ui.gui as gui
 import world
@@ -10,6 +11,7 @@ import ui.interface as interface
 from utils.vectors import *
 from tkinter import *
 from tests.internal_tests import *
+from screens.click_chain import * # TODO Make a click chain from splash to main menu
 
 # The main game class that is intantiated on startup.
 class Game:
@@ -20,7 +22,7 @@ class Game:
         pygame.init()
         self.window = pygame.display.set_mode((w, h) ) # TODO Use scaled mode in the future for pixel art
         pygame.display.set_caption("SREM")
-        pygame.display.set_icon(assets.load_image("icon.png"))
+        pygame.display.set_icon(assets.loadImage("icon.png"))
         # The onscreen display objects creation:
         self.view = sprite.View(self.window)
         self.gui = gui.Gui(self.window)
@@ -44,6 +46,12 @@ class Game:
         ]
         for test in self.tests:
             test.onInit()
+
+        self.screen_chain = ClickChain([
+            SplashScreen(), 
+            MainMenu(),
+            GameScreen()
+        ])
             
 
     def loop(self):
@@ -67,10 +75,8 @@ class Game:
                 # Game speed handling, propgated to the world for faster/slower simulation
                 # and further - to each car present on screen, including spawning of vehicles.
                 if event.type == pygame.KEYDOWN:
-                    self.speed = 1 if event.key == pygame.K_1 else self.speed
-                    self.speed = 2 if event.key == pygame.K_2 else self.speed
-                    self.speed = 3 if event.key == pygame.K_3 else self.speed
-                    self.speed = 4 if event.key == pygame.K_4 else self.speed
+                    speed_map = { pygame.K_1: 1, pygame.K_2: 2, pygame.K_3: 3, pygame.K_4: 4 }
+                    self.speed = speed_map[event.key]
 
             # Update and drawing calls in sequence after events handling
             self.update(self.clock)

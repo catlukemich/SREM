@@ -15,7 +15,7 @@ class Sprite:
         """
         if type(image) == str:
             import assets
-            self.image = assets.load_image(image)
+            self.image = assets.loadImage(image)
         else:
             self.image = image
         self.location = vec3(0, 0, 0)
